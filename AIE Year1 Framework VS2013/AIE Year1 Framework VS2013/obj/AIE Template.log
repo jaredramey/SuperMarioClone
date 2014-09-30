@@ -1,13 +1,15 @@
-﻿Build started 9/30/2014 11:35:04 AM.
+﻿Build started 9/30/2014 4:55:10 PM.
      1>Project "C:\Users\jared.ramey\Documents\GitHub\SuperMarioClone\AIE Year1 Framework VS2013\AIE Year1 Framework VS2013\AIE Template.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I./ /I./include/ /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"obj\\" /Fd"obj\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Player.cpp source\main.cpp
-         main.cpp
-     1>c:\users\jared.ramey\documents\github\supermarioclone\aie year1 framework vs2013\aie year1 framework vs2013\source\main.cpp : fatal error C1041: cannot open program database 'c:\users\jared.ramey\documents\github\supermarioclone\aie year1 framework vs2013\aie year1 framework vs2013\obj\vc120.pdb'; if multiple CL.EXE write to the same .PDB file, please use /FS
          Player.cpp
+     1>c:\users\jared.ramey\documents\github\supermarioclone\aie year1 framework vs2013\aie year1 framework vs2013\player.cpp : fatal error C1041: cannot open program database 'c:\users\jared.ramey\documents\github\supermarioclone\aie year1 framework vs2013\aie year1 framework vs2013\obj\vc120.pdb'; if multiple CL.EXE write to the same .PDB file, please use /FS
+         Generating Code...
+         Compiling...
+         main.cpp
          Generating Code...
      1>Done Building Project "C:\Users\jared.ramey\Documents\GitHub\SuperMarioClone\AIE Year1 Framework VS2013\AIE Year1 Framework VS2013\AIE Template.vcxproj" (Build target(s)) -- FAILED.
 
 Build FAILED.
 
-Time Elapsed 00:00:00.54
+Time Elapsed 00:00:00.39
