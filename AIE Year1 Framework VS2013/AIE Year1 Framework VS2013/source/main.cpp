@@ -1,9 +1,12 @@
 ﻿#include "AIE.h"
 #include <iostream>
 
+const int screenWidth = 1500;
+const int screenHeigth = 600;
+
 int main( int argc, char* argv[] )
 {	
-    Initialise(800, 600, false, "My Awesome Game");
+    Initialise(screenWidth, screenHeigth, false, "Super Mario Clone");
     
     SetBackgroundColour(SColour(0, 0, 0, 255));
 
