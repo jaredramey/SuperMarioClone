@@ -1,24 +1,30 @@
 ﻿#include "AIE.h"
+#include "Player.h"
 #include <iostream>
 
 const int screenWidth = 1500;
 const int screenHeigth = 600;
 
+Player player = Player();
+
 int main( int argc, char* argv[] )
 {	
     Initialise(screenWidth, screenHeigth, false, "Super Mario Clone");
-    
-    SetBackgroundColour(SColour(0, 0, 0, 255));
+    SetBackgroundColour(SColour(0, 189, 255, 255));
 
-    int myTextureHandle = CreateSprite("./images/crate_sideup.png", 64, 64, true);
-    float xPos = 100;
-    float yPos = 100;
+	//Set everything needed for player
+	unsigned int myTextureHandle = CreateSprite("./images/platformerArt_v4/png/character/front.png", 66, 92, true);
+	player.SetSpriteID(myTextureHandle);
+	player.SetPosition(100.f, 100.f);
+	player.SetSize(66, 92);
+	player.SetMovementKeys(65, 68, 87);
+	player.SetMoveExtreeme(300, 1200, 50);
 
     //Game Loop
     do
     {
-        MoveSprite(myTextureHandle, xPos, yPos);
-        DrawSprite(myTextureHandle);
+		player.Move(1.0f, GetDeltaTime());
+        DrawSprite(player.GetSpriteID());
 
         ClearScreen();
 

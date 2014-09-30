@@ -1,5 +1,5 @@
 #include "Player.h"
-
+#include "AIE.h"
 
 Player::Player()
 {
@@ -29,6 +29,13 @@ void Player::SetMovementKeys(unsigned int a_moveLeft, unsigned int a_moveRight, 
 	jump = a_jump;
 }
 
+void Player::SetMoveExtreeme(float a_leftExtreeme, float a_rightExtreeme, float a_bottomeExtreeme)
+{
+	leftMoveExtreeme = a_leftExtreeme;
+	rightMoveExtreeme = a_rightExtreeme;
+	bottomExtreeme = a_bottomeExtreeme;
+}
+
 unsigned int Player::GetSpriteID()
 {
 	return spriteID;
@@ -54,9 +61,53 @@ float Player::GetSizeHeigth()
 	return heigth;
 }
 
-void Player::Move(unsigned int a_spriteID, float delta)
+float Player::GetleftExtreeme()
 {
+	return leftMoveExtreeme;
+}
 
+float Player::GetrightExtreeme()
+{
+	return rightMoveExtreeme;
+}
+
+float Player::GetbottomExtreeme()
+{
+	return bottomExtreeme;
+}
+
+void Player::Move(float a_speed, float a_timeStep)
+{
+	if (IsKeyDown(moveLeft))
+	{
+		x -= a_timeStep * a_speed;
+		if (x < (leftMoveExtreeme + width*.1f))
+		{
+			x = (leftMoveExtreeme + width*.1f);
+		}
+	}
+
+	//Moving Right
+	if (IsKeyDown(moveRight))
+	{
+		x += a_timeStep * a_speed;
+		if (x >(rightMoveExtreeme - width*.37f))
+		{
+			x = (rightMoveExtreeme - width*.37f);
+		}
+	}
+
+	//Moving Up
+	if (IsKeyDown(jump))
+	{
+		y += a_timeStep * a_speed;
+		if (y > (bottomExtreeme + 100))
+		{
+			y -= a_timeStep * a_speed;
+		}
+	}
+	//Move the player sprite
+	MoveSprite(spriteID, x, y);
 }
 
 
