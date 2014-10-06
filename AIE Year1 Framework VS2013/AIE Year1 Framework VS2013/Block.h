@@ -14,6 +14,14 @@ public:
 		float blockY;
 		float blockWidth;
 		float blockHeigth;
+		float upperLeftCornerX;
+		float lowerLeftCornerX;
+		float upperRightCornerX;
+		float lowerRightCornerX;
+		float upperLeftCornerY;
+		float lowerLeftCornerY;
+		float upperRightCornerY;
+		float lowerRightCornerY;
 
 		bool hasBeenHit = false;
 
@@ -21,14 +29,17 @@ public:
 	};
 
 	Object blocks[50];
+	Object floatingBlocks[50];
 
 	Block();
 	~Block();
 
 
-	virtual void SetBlockPosition(float a_blockX, float a_blockY);
-	virtual void DrawBlock();
-	virtual void SetBlockTextureID(unsigned int a_textureID);
+	virtual void SetBlockPosition(float a_blockX, float a_blockY, int a_blockID, int a_itteration);
+	virtual void DrawBlock(int a_blockID , int a_itteration);
+	virtual void SetBlockTextureID(int a_blockID, unsigned int a_textureID);
+	virtual void SetBlockCorners(int a_blockID, int a_itteration);
+	virtual void SetBlockWidthHeigth(float a_width, float a_heigth);
 	
 };
 
