@@ -22,29 +22,6 @@ void Player::SetSize(float a_width, float a_heigth)
 	heigth = a_heigth;
 }
 
-void Player::WalkAnimationSet()
-{
-	walkSprites[0] = spriteID;
-	walkSprites[1] = CreateSprite("./images/platformerArt_v4/png/character/walk/walk0002.png", 66, 92, true);
-	walkSprites[2] = CreateSprite("./images/platformerArt_v4/png/character/walk/walk0003.png", 66, 92, true);
-	walkSprites[3] = CreateSprite("./images/platformerArt_v4/png/character/walk/walk0004.png", 66, 92, true);
-	walkSprites[4] = CreateSprite("./images/platformerArt_v4/png/character/walk/walk0005.png", 66, 92, true);
-	walkSprites[5] = CreateSprite("./images/platformerArt_v4/png/character/walk/walk0006.png", 66, 92, true);
-	walkSprites[6] = CreateSprite("./images/platformerArt_v4/png/character/walk/walk0007.png", 66, 92, true);
-	walkSprites[7] = CreateSprite("./images/platformerArt_v4/png/character/walk/walk0008.png", 66, 92, true);
-	walkSprites[8] = CreateSprite("./images/platformerArt_v4/png/character/walk/walk0009.png", 66, 92, true);
-	walkSprites[9] = CreateSprite("./images/platformerArt_v4/png/character/walk/walk00010.png", 66, 92, true);
-	walkSprites[10] = CreateSprite("./images/platformerArt_v4/png/character/walk/walk00011.png", 66, 92, true);
-}
-
-void Player::WalkAnimation()
-{
-	for (int i = 0; i < 10; i++)
-	{
-		DrawSprite(walkSprites[i]);
-	}
-
-}
 
 void Player::SetMovementKeys(unsigned int a_moveLeft, unsigned int a_moveRight, unsigned int a_jump)
 {

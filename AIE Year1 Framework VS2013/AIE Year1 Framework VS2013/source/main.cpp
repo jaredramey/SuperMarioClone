@@ -24,7 +24,7 @@ int main( int argc, char* argv[] )
 	//unsigned int myTextureHandle = CreateSprite("./images/platformerArt_v4/png/character/front.png", 66, 92, true);
 	player.SetSpriteID(CreateSprite("./images/platformerArt_v4/png/character/front.png", 66, 92, true));
 	player.SetPosition(100.f, 200.f);
-	player.SetSize(66, 92);
+	player.SetSize(66.f, 92.f);
 	player.SetMovementKeys(65, 68, 87);
 	player.SetMoveExtreeme(50, 1500, 150);
 
