@@ -6,6 +6,8 @@ GroundBlock::GroundBlock()
 {
 }
 
+
+
 void Block::SetBlockTextureID(int a_blockID ,unsigned int a_textureID)
 {
 	if (a_blockID == 1)

@@ -81,43 +81,45 @@ float Player::GetbottomExtreeme()
 	return bottomExtreeme;
 }
 
+
+
 //upper left
-float Player::GetCorner1()
+float Player::GetPlayerCorner1()
 {
 	return upperPlayerLeftCornerX;
 }
 
-float Player::GetCorner2()
+float Player::GetPlayerCorner2()
 {
 	return upperPlayerLeftCornerY;
 }
 //upper right
-float Player::GetCorner1_2()
+float Player::GetPlayerCorner1_2()
 {
 	return upperPlayerRightCornerX;
 }
 
-float Player::GetCorner2_2()
+float Player::GetPlayerCorner2_2()
 {
 	return upperPlayerRightCornerY;
 }
 //lower left
-float Player::GetCorner1_3()
+float Player::GetPlayerCorner1_3()
 {
 	return lowerPlayerLeftCornerX;
 }
 
-float Player::GetCorner2_3()
+float Player::GetPlayerCorner2_3()
 {
 	return lowerPlayerLeftCornerY;
 }
 //lower right
-float Player::GetCorner1_4()
+float Player::GetPlayerCorner1_4()
 {
 	return lowerPlayerRightCornerX;
 }
 
-float Player::GetCorner2_4()
+float Player::GetPlayerCorner2_4()
 {
 	return lowerPlayerRightCornerY;
 }
@@ -138,7 +140,7 @@ void Player::SetPlayerCorners()
 	lowerPlayerRightCornerY = (y - (heigth * .5f));
 }
 
-void Player::CheckCollision(float a_upLeftX, float a_upLeftY, float a_upRightX, float upRightY, float a_lowLeftX, float a_lowLeftY, float a_lowRightX, float lowRightY)
+void Player::CheckCollision(float a_upLeftX, float a_upLeftY, float a_upRightX, float a_upRightY, float a_lowLeftX, float a_lowLeftY, float a_lowRightX, float a_lowRightY)
 {
 	/*for (int i = 0; i < 50; i++)
 	{
@@ -159,15 +161,17 @@ void Player::CheckCollision(float a_upLeftX, float a_upLeftY, float a_upRightX, 
 		}*/
 	for (int i = 0; i < 50; i++)
 	{
-		if ((a_lowLeftY >= (blocks[i].upperLeftCornerY)) && (a_lowLeftX >= blocks[i].upperLeftCornerX) && (a_lowLeftX >= blocks[i].upperRightCornerX))
+		//(a_lowLeftY >= (blocks[i].upperLeftCornerY)) && (a_lowLeftX >= blocks[i].upperLeftCornerX) && (a_lowLeftX >= blocks[i].upperRightCornerX)
+		//
+		if ((a_lowLeftY <= blocks[i].upperLeftCornerY && a_lowRightY <= blocks[i].upperRightCornerY) /*&& (a_lowLeftX >= blocks[i].upperLeftCornerX && a_lowRightX <= blocks[i].upperRightCornerX)*/)
 		{
 			collision = true;
 		}
 
-		if ((a_lowLeftX < blocks[i].upperLeftCornerX) && (a_lowRightX > blocks[i].upperRightCornerX))
+		/*if ((a_lowLeftX < blocks[i].upperLeftCornerX) && (a_lowRightX > blocks[i].upperRightCornerX))
 		{
 			collision = false;
-		}
+		}*/
 	}
 
 	if (collision != true)
@@ -179,7 +183,8 @@ void Player::CheckCollision(float a_upLeftX, float a_upLeftY, float a_upRightX, 
 
 void Player::Move(float a_speed, float a_timeStep)
 {
-	CheckCollision(GetCorner1(), GetCorner2(), GetCorner1_2(), GetCorner2_2(), GetCorner1_3(), GetCorner2_3(), GetCorner1_4(), GetCorner2_4());
+	//float a_upLeftX, float a_upLeftY, float a_upRightX, float upRightY, float a_lowLeftX, float a_lowLeftY, float a_lowRightX, float a_lowRightY
+	CheckCollision(GetPlayerCorner1(), GetPlayerCorner2(), GetPlayerCorner1_2(), GetPlayerCorner2_2(), GetPlayerCorner1_3(), GetPlayerCorner2_3(), GetPlayerCorner1_4(), GetPlayerCorner2_4());
 
 	if (IsKeyDown(moveLeft) && hasJumped == false)
 	{
@@ -206,12 +211,12 @@ void Player::Move(float a_speed, float a_timeStep)
 				y += velocity;
 	}
 
-	if (!IsKeyDown(jump) && velocity <= 0)
+	if (!IsKeyDown(jump))
 	{
 			
 			if (collision == true)
 			{
-				y = (blocks[1].upperRightCornerY + (heigth * 1.3f));
+				y = (blocks[1].upperRightCornerY + (heigth));
 				hasJumped = false;
 				velocity = 10.f;
 				collision = false;
@@ -219,7 +224,7 @@ void Player::Move(float a_speed, float a_timeStep)
 
 			else if (hasJumped == false)
 			{
-				y -= 0.9f;
+				y -= 0.1f;
 			}
 	}
 

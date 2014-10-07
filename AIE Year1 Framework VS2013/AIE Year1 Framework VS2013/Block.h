@@ -48,6 +48,7 @@ public:
 	virtual float GetCorner2_3();
 	virtual float GetCorner1_4();
 	virtual float GetCorner2_4();
+	float GetBlockCorner(int a_cornerID, int a_itterition);
 	
 };
 

@@ -33,7 +33,7 @@ int main( int argc, char* argv[] )
 
 	//set everything for the ground block
 	gBlock->SetBlockTextureID(CreateSprite("./images/platformerArt_v4/png/ground.png", 100, 100, true), 1);
-	gBlock->SetBlockPosition(35, 25, 1, 4);
+	gBlock->SetBlockPosition(50, 50, 1, 4);
 	gBlock->SetBlockWidthHeigth(100, 100, 4);
 	gBlock->SetBlockCorners(1, 4);
 	
@@ -56,9 +56,9 @@ int main( int argc, char* argv[] )
     //Game Loop
     do
     {
-		ClearScreen();
+		ClearScreen();		
 		player.SetPlayerCorners();
-		gBlock->SetBlockCorners(1, 4);
+		
 
 		//debugging corners
 		//Block
@@ -72,20 +72,22 @@ int main( int argc, char* argv[] )
 		DrawSprite(Debug4);
 
 		//Player
-		MoveSprite(Debug5, player.GetCorner1(), player.GetCorner2());
+		MoveSprite(Debug5, player.GetPlayerCorner1(), player.GetPlayerCorner2());
 		DrawSprite(Debug5);
-		MoveSprite(Debug6, player.GetCorner1_2(), player.GetCorner2_2());
+		MoveSprite(Debug6, player.GetPlayerCorner1_2(), player.GetPlayerCorner2_2());
 		DrawSprite(Debug6);
-		MoveSprite(Debug7, player.GetCorner1_3(), player.GetCorner2_3());
+		MoveSprite(Debug7, player.GetPlayerCorner1_3(), player.GetPlayerCorner2_3());
 		DrawSprite(Debug7);
-		MoveSprite(Debug8, player.GetCorner1_4(), player.GetCorner2_4());
+		MoveSprite(Debug8, player.GetPlayerCorner1_4(), player.GetPlayerCorner2_4());
 		DrawSprite(Debug8);
+
+		gBlock->DrawBlock(1, 4);
+		bBlock->DrawBlock(2, 4);
 
 		player.Move(300.0f, GetDeltaTime());
         DrawSprite(player.GetSpriteID());
 
-		gBlock->DrawBlock(1, 4);
-		bBlock->DrawBlock(2, 4);
+		
        
 
     } while(!FrameworkUpdate());
