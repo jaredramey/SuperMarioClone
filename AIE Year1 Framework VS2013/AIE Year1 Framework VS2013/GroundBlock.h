@@ -4,6 +4,8 @@ class GroundBlock :
 	public Block
 {
 public:
+	
+
 	GroundBlock();
 	~GroundBlock();
 };

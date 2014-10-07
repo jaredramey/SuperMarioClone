@@ -39,7 +39,15 @@ public:
 	virtual void DrawBlock(int a_blockID , int a_itteration);
 	virtual void SetBlockTextureID(int a_blockID, unsigned int a_textureID);
 	virtual void SetBlockCorners(int a_blockID, int a_itteration);
-	virtual void SetBlockWidthHeigth(float a_width, float a_heigth);
+	virtual void SetBlockWidthHeigth(float a_width, float a_heigth, int a_itteration);
+	virtual float GetCorner1();
+	virtual float GetCorner2();
+	virtual float GetCorner1_2();
+	virtual float GetCorner2_2();
+	virtual float GetCorner1_3();
+	virtual float GetCorner2_3();
+	virtual float GetCorner1_4();
+	virtual float GetCorner2_4();
 	
 };
 

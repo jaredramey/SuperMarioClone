@@ -74,23 +74,73 @@ void Block::DrawBlock(int a_blockID ,int a_itteration)
 	}
 }
 
-void Block::SetBlockWidthHeigth(float a_width, float a_heigth)
+void Block::SetBlockWidthHeigth(float a_width, float a_heigth, int a_itteration)
 {
-	
+	for (int i = 0; i < a_itteration; i++)
+	{
+		blocks[i].blockWidth = a_width;
+		blocks[i].blockHeigth = a_heigth;
+	}
 }
+
+//upper left
+float Block::GetCorner1()
+{
+	return blocks[1].upperLeftCornerX;
+}
+
+float Block::GetCorner2()
+{
+	return blocks[1].upperLeftCornerY;
+}
+//upper right
+float Block::GetCorner1_2()
+{
+	return blocks[1].upperRightCornerX;
+}
+
+float Block::GetCorner2_2()
+{
+	return blocks[1].upperRightCornerY;
+}
+//lower left
+float Block::GetCorner1_3()
+{
+	return blocks[1].lowerLeftCornerX;
+}
+
+float Block::GetCorner2_3()
+{
+	return blocks[1].lowerLeftCornerY;
+}
+//lower right
+float Block::GetCorner1_4()
+{
+	return blocks[1].lowerRightCornerX;
+}
+
+float Block::GetCorner2_4()
+{
+	return blocks[1].lowerRightCornerY;
+}
+
 
 void Block::SetBlockCorners(int a_blockID, int a_itteration)
 {
 	if (a_blockID == 1)
 	{
-		for (int i = 0; i < 50; i++)
+		for (int i = 0; i < a_itteration; i++)
 		{
+			//Upper Left (to the left and down)
 			blocks[i].upperLeftCornerX = (blocks[i].blockX - (blocks[i].blockWidth * .5f));
-			blocks[i].upperLeftCornerY = (blocks[i].blockY + (blocks[i].blockHeigth));
+			blocks[i].upperLeftCornerY = (blocks[i].blockY + (blocks[i].blockHeigth * .5f));
+			//Upper Right (to the right and up)
 			blocks[i].upperRightCornerX = (blocks[i].blockX + (blocks[i].blockWidth * .5f));
 			blocks[i].upperRightCornerY = (blocks[i].blockY + (blocks[i].blockHeigth  * .5f));
+			//Lower Left (to the left and down)
 			blocks[i].lowerLeftCornerX = (blocks[i].blockX - (blocks[i].blockWidth * .5f));
 			blocks[i].lowerLeftCornerY = (blocks[i].blockY - (blocks[i].blockHeigth * .5f));
+			//Lower Right (to the right and down)
 			blocks[i].lowerRightCornerX = (blocks[i].blockX + (blocks[i].blockWidth * .5f));
 			blocks[i].lowerRightCornerY = (blocks[i].blockY - (blocks[i].blockHeigth * .5f));
 		}
@@ -98,7 +148,7 @@ void Block::SetBlockCorners(int a_blockID, int a_itteration)
 
 	if (a_blockID == 2)
 	{
-		for (int i = 0; i < 50; i++)
+		for (int i = 0; i < a_itteration; i++)
 		{
 			floatingBlocks[i].upperLeftCornerX = (floatingBlocks[i].blockX - (floatingBlocks[i].blockWidth / 2));
 			floatingBlocks[i].upperLeftCornerY = (floatingBlocks[i].blockY + (floatingBlocks[i].blockHeigth / 2));

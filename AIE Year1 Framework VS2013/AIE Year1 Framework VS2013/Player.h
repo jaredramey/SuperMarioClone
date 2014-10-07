@@ -60,6 +60,7 @@ public:
 	float GetrightExtreeme();
 	float GetbottomExtreeme();
 
+
 	void CheckCollision();
 
 	void Move(float a_speed, float a_timeStep);

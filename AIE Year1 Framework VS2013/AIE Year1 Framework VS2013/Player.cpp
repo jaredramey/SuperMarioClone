@@ -81,14 +81,19 @@ float Player::GetbottomExtreeme()
 	return bottomExtreeme;
 }
 
+
 void Player::SetPlayerCorners()
 {
+	//Upper Left (to the left and down)
 	upperPlayerLeftCornerX = (x - (width * .5f));
 	upperPlayerLeftCornerY = (y + (heigth * .5f));
+	//Upper Right (to the right and up)
 	upperPlayerRightCornerX = (x + (width * .5f));
 	upperPlayerRightCornerY = (y + (heigth * .5f));
+	//Lower Left (to the left and down)
 	lowerPlayerLeftCornerX = (x - (width * .5f));
 	lowerPlayerLeftCornerY = (y - (heigth * .5f));
+	//Lower Right (to the right and down)
 	lowerPlayerRightCornerX = (x + (width * .5f));
 	lowerPlayerRightCornerY = (y - (heigth * .5f));
 }
@@ -97,7 +102,7 @@ void Player::CheckCollision()
 {
 	for (int i = 0; i < 50; i++)
 	{
-		if ((lowerPlayerLeftCornerY <= (blocks[i].upperLeftCornerY + heigth) /* && lowerPlayerRightCornerY <= blocks[i].upperRightCornerY) && (x <= blocks[i].upperLeftCornerX && x >= blocks[i].upperRightCornerX)*/))
+		if ((lowerPlayerLeftCornerY <= blocks[i].upperLeftCornerY && lowerPlayerLeftCornerX >= blocks[i].upperLeftCornerX) && (lowerPlayerRightCornerY <= blocks[i].upperRightCornerY && lowerPlayerRightCornerX <= blocks[i].upperRightCornerX))
 		{
 			collision = true;
 			goto checkDone;
@@ -155,7 +160,6 @@ void Player::Move(float a_speed, float a_timeStep)
 			CheckCollision();
 			if (collision == true)
 			{
-				y = 100;
 				for (int i = 0; i < 50; i++)
 				{
 					y = (blocks[i].upperRightCornerY + (heigth));
