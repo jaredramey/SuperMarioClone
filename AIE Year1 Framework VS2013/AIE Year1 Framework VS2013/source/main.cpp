@@ -4,7 +4,7 @@
 #include "GroundBlock.h"
 #include <iostream>
 
-const int screenWidth = 1500;
+const int screenWidth = 1300;
 const int screenHeigth = 600;
 
 Player player = Player();
@@ -32,9 +32,10 @@ int main( int argc, char* argv[] )
 	
 
 	//set everything for the ground block
-	gBlock->SetBlockTextureID(CreateSprite("./images/platformerArt_v4/png/ground.png", 70, 70, true), 1);
-	gBlock->SetBlockPosition(35, 25, 1, 20);
-	gBlock->SetBlockWidthHeigth(70.f, 70.f, 20);
+	gBlock->SetBlockTextureID(CreateSprite("./images/platformerArt_v4/png/ground.png", 100, 100, true), 1);
+	gBlock->SetBlockPosition(35, 25, 1, 4);
+	gBlock->SetBlockWidthHeigth(100, 100, 4);
+	gBlock->SetBlockCorners(1, 4);
 	
 
 	//set everything for the "brick" block
@@ -44,31 +45,46 @@ int main( int argc, char* argv[] )
 
 	//for debugging where corners are
 	unsigned int Debug = CreateSprite("./images/platformerArt_v4/png/alien_plant.png", 10, 10, true);
-	unsigned int Debug2 = CreateSprite("./images/platformerArt_v4/png/alien_plant.png", 10, 10, true);
+	unsigned int Debug2 = CreateSprite("./images/platformerArt_v4/png/coin_bronze.png", 10, 10, true);
 	unsigned int Debug3 = CreateSprite("./images/platformerArt_v4/png/alien_plant.png", 10, 10, true);
 	unsigned int Debug4 = CreateSprite("./images/platformerArt_v4/png/alien_plant.png", 10, 10, true);
+	unsigned int Debug5 = CreateSprite("./images/platformerArt_v4/png/alien_plant.png", 10, 10, true);
+	unsigned int Debug6 = CreateSprite("./images/platformerArt_v4/png/alien_plant.png", 10, 10, true);
+	unsigned int Debug7 = CreateSprite("./images/platformerArt_v4/png/alien_plant.png", 10, 10, true);
+	unsigned int Debug8 = CreateSprite("./images/platformerArt_v4/png/alien_plant.png", 10, 10, true);
 
     //Game Loop
     do
     {
 		ClearScreen();
 		player.SetPlayerCorners();
-		gBlock->SetBlockCorners(1, 20);
+		gBlock->SetBlockCorners(1, 4);
 
 		//debugging corners
+		//Block
 		MoveSprite(Debug, gBlock->GetCorner1(), gBlock->GetCorner2());
 		DrawSprite(Debug);
 		MoveSprite(Debug2, gBlock->GetCorner1_2(), gBlock->GetCorner2_2());
 		DrawSprite(Debug2);
-		/*MoveSprite(Debug3, gBlock->GetCorner1_3(), gBlock->GetCorner2_3());
+		MoveSprite(Debug3, gBlock->GetCorner1_3(), gBlock->GetCorner2_3());
 		DrawSprite(Debug3);
 		MoveSprite(Debug4, gBlock->GetCorner1_4(), gBlock->GetCorner2_4());
-		DrawSprite(Debug4);*/
+		DrawSprite(Debug4);
+
+		//Player
+		MoveSprite(Debug5, player.GetCorner1(), player.GetCorner2());
+		DrawSprite(Debug5);
+		MoveSprite(Debug6, player.GetCorner1_2(), player.GetCorner2_2());
+		DrawSprite(Debug6);
+		MoveSprite(Debug7, player.GetCorner1_3(), player.GetCorner2_3());
+		DrawSprite(Debug7);
+		MoveSprite(Debug8, player.GetCorner1_4(), player.GetCorner2_4());
+		DrawSprite(Debug8);
 
 		player.Move(300.0f, GetDeltaTime());
         DrawSprite(player.GetSpriteID());
 
-		gBlock->DrawBlock(1, 20);
+		gBlock->DrawBlock(1, 4);
 		bBlock->DrawBlock(2, 4);
        
 

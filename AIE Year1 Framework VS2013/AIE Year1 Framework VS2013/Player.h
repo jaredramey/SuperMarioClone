@@ -1,8 +1,9 @@
 #pragma once
 #include "AIE.h"
 #include "Block.h"
+#include "Window.h"
 
-class Player : public Block
+class Player : public Block, public Window
 {
 private:
 	int health;
@@ -60,8 +61,20 @@ public:
 	float GetrightExtreeme();
 	float GetbottomExtreeme();
 
+	//upper left
+	float GetCorner1();
+	float GetCorner2();
+	//upper right
+	float GetCorner1_2();
+	float GetCorner2_2();
+	//lower left
+	float GetCorner1_3();
+	float GetCorner2_3();
+	//lower right
+	float GetCorner1_4();
+	float GetCorner2_4();
 
-	void CheckCollision();
+	void CheckCollision(float a_upLeftX, float a_upLeftY, float a_upRightX, float upRightY, float a_lowLeftX, float a_lowLeftY, float a_lowRightX, float lowRightY);
 
 	void Move(float a_speed, float a_timeStep);
 };

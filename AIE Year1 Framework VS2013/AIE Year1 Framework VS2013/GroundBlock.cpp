@@ -34,7 +34,7 @@ void Block::SetBlockPosition(float a_x, float a_y, int a_blockID, int a_itterati
 
 		for (int i = 1; i < a_itteration; i++)
 		{
-			blocks[i].blockX = (blocks[i - 1].blockX + 68);
+			blocks[i].blockX = (blocks[i - 1].blockX + 98);
 			blocks[i].blockY = a_y;
 		}
 	}
