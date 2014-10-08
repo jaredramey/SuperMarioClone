@@ -2,13 +2,12 @@
 #include "AIE.h"
 
 
-GroundBlock::GroundBlock()
+GroundBlock::GroundBlock() : Block()
 {
 }
 
 
-
-void Block::SetBlockTextureID(int a_blockID ,unsigned int a_textureID)
+/*void Block::SetBlockTextureID(int a_blockID ,unsigned int a_textureID)
 {
 	if (a_blockID == 1)
 	{
@@ -163,7 +162,7 @@ void Block::SetBlockCorners(int a_blockID, int a_itteration)
 		}
 	}
 }
-
+*/
 GroundBlock::~GroundBlock()
 {
 }

@@ -1,54 +1,29 @@
 #pragma once
 #include <vector>
 #include <iostream>
+#include "Entity.h"
 
 using namespace std;
 
-class Block
+class Block : public Entity
 {
 public:
 
-	struct Object
-	{
-		float blockX;
-		float blockY;
-		float blockWidth;
-		float blockHeigth;
-		float upperLeftCornerX;
-		float lowerLeftCornerX;
-		float upperRightCornerX;
-		float lowerRightCornerX;
-		float upperLeftCornerY;
-		float lowerLeftCornerY;
-		float upperRightCornerY;
-		float lowerRightCornerY;
-
-		bool hasBeenHit = false;
-
-		unsigned int textureID;
-	};
-
-	Object blocks[50];
-	std::vector<Object> myVect;
-	Object floatingBlocks[50];
 
 	Block();
 	~Block();
 	
-	virtual void SetBlockPosition(float a_blockX, float a_blockY, int a_blockID, int a_itteration);
+	/*virtual void SetBlockPosition(float a_blockX, float a_blockY, int a_blockID, int a_itteration);
 	virtual void DrawBlock(int a_blockID , int a_itteration);
 	virtual void SetBlockTextureID(int a_blockID, unsigned int a_textureID);
 	virtual void SetBlockCorners(int a_blockID, int a_itteration);
-	virtual void SetBlockWidthHeigth(float a_width, float a_heigth, int a_itteration);
-	virtual float GetCorner1();
-	virtual float GetCorner2();
-	virtual float GetCorner1_2();
-	virtual float GetCorner2_2();
-	virtual float GetCorner1_3();
-	virtual float GetCorner2_3();
-	virtual float GetCorner1_4();
-	virtual float GetCorner2_4();
-	float GetBlockCorner(int a_cornerID, int a_itterition);
+	virtual void SetBlockWidthHeigth(float a_width, float a_heigth, int a_itteration);*/
 	
+
+	static const char* BLOCK_SPRITEID;
+	static const float BLOCK_X;
+	static const float BLOCK_Y;
+	static const float BLOCK_WIDTH;
+	static const float BLOCK_HEIGTH;
 };
 

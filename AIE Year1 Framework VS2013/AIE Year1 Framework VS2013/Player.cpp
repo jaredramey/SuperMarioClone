@@ -1,11 +1,19 @@
 #include "Player.h"
 #include "AIE.h"
 
-Player::Player()
+char* PLAYER_SPRITEID = "./images/platformerArt_v4/png/character/front.png";
+float PLAYER_X = 100.f;
+float PLAYER_Y = 300.f;
+float PLAYER_WIDTH = 66.f;
+float PLAYER_HEIGTH = 92.f;
+
+Player::Player() : Entity(PLAYER_X, PLAYER_Y, PLAYER_WIDTH, PLAYER_HEIGTH, PLAYER_SPRITEID)
 {
+	
 }
 
-void  Player::SetSpriteID(unsigned int a_spriteID)
+
+/*void  Player::SetSpriteID(unsigned int a_spriteID)
 {
 	spriteID = a_spriteID;
 }
@@ -22,24 +30,9 @@ void Player::SetSize(float a_width, float a_heigth)
 	heigth = a_heigth;
 }
 
-void Player::SetVelocity(float a_velocity)
-{
-	velocity = a_velocity;
-}
 
-void Player::SetMovementKeys(unsigned int a_moveLeft, unsigned int a_moveRight, unsigned int a_jump)
-{
-	moveLeft = a_moveLeft;
-	moveRight = a_moveRight;
-	jump = a_jump;
-}
 
-void Player::SetMoveExtreeme(float a_leftExtreeme, float a_rightExtreeme, float a_bottomeExtreeme)
-{
-	leftMoveExtreeme = a_leftExtreeme;
-	rightMoveExtreeme = a_rightExtreeme;
-	bottomExtreeme = a_bottomeExtreeme;
-}
+
 
 unsigned int Player::GetSpriteID()
 {
@@ -139,98 +132,75 @@ void Player::SetPlayerCorners()
 	lowerPlayerRightCornerX = (x + (width * .5f));
 	lowerPlayerRightCornerY = (y - (heigth * .5f));
 }
+*/
 
-void Player::CheckCollision(float a_upLeftX, float a_upLeftY, float a_upRightX, float a_upRightY, float a_lowLeftX, float a_lowLeftY, float a_lowRightX, float a_lowRightY)
+void Player::SetVelocity(float a_velocity)
 {
-	/*for (int i = 0; i < 50; i++)
-	{
-		if ((lowerPlayerLeftCornerY <= blocks[i].upperLeftCornerY && lowerPlayerLeftCornerX >= blocks[i].upperLeftCornerX) && (lowerPlayerRightCornerY <= blocks[i].upperRightCornerY && lowerPlayerRightCornerX <= blocks[i].upperRightCornerX))
-		{
-			collision = true;
-			goto checkDone;
-		}
+	velocity = a_velocity;
+}
 
-		if ((lowerPlayerLeftCornerY <= floatingBlocks[i].upperLeftCornerY && lowerPlayerRightCornerY <= floatingBlocks[i].upperRightCornerY) && (x >= blocks[i].upperLeftCornerX && x <= blocks[i].upperRightCornerX))
-		{
-			return collision = true;
-		}*/
+void Player::SetMovementKeys(unsigned int a_moveLeft, unsigned int a_moveRight, unsigned int a_jump)
+{
+	moveLeft = a_moveLeft;
+	moveRight = a_moveRight;
+	jump = a_jump;
+}
 
-		/*else
-		{
-			collision = false;
-		}*/
-	for (int i = 0; i < myVect.size(); i++)
-	{
-	
-	}
-
-	for (int i = 0; i < 50; i++)
-	{
-		//(a_lowLeftY >= (blocks[i].upperLeftCornerY)) && (a_lowLeftX >= blocks[i].upperLeftCornerX) && (a_lowLeftX >= blocks[i].upperRightCornerX)
-		//
-		if ((a_lowLeftY <= blocks[i].upperLeftCornerY && a_lowRightY <= blocks[i].upperRightCornerY) /*&& (a_lowLeftX >= blocks[i].upperLeftCornerX && a_lowRightX <= blocks[i].upperRightCornerX)*/)
-		{
-			collision = true;
-		}
-
-		/*if ((a_lowLeftX < blocks[i].upperLeftCornerX) && (a_lowRightX > blocks[i].upperRightCornerX))
-		{
-			collision = false;
-		}*/
-	}
-
-	if (collision != true)
-	{
-		collision = false;
-	}
-
+void Player::SetMoveExtreeme(float a_leftExtreeme, float a_rightExtreeme, float a_bottomeExtreeme)
+{
+	leftMoveExtreeme = a_leftExtreeme;
+	rightMoveExtreeme = a_rightExtreeme;
+	bottomExtreeme = a_bottomeExtreeme;
 }
 
 void Player::Move(float a_speed, float a_timeStep)
 {
-	//float a_upLeftX, float a_upLeftY, float a_upRightX, float upRightY, float a_lowLeftX, float a_lowLeftY, float a_lowRightX, float a_lowRightY
-	CheckCollision(GetPlayerCorner1(), GetPlayerCorner2(), GetPlayerCorner1_2(), GetPlayerCorner2_2(), GetPlayerCorner1_3(), GetPlayerCorner2_3(), GetPlayerCorner1_4(), GetPlayerCorner2_4());
+
+	for (int i = 0; i < 50; i++)
+	{
+		//CheckCollision(player.GetX, player.GetY, blocks[i].blockX, blocks[i].blockY, player.GetWidth, player.GetHeigth, blocks[i].blockWidth, blocks[i].blockHeigth);
+	}
 
 	if (IsKeyDown(moveLeft) && hasJumped == false)
 	{
-		x -= a_timeStep * a_speed;
-		if (x < (leftMoveExtreeme + width*.1f))
+		player.ChangeX((a_timeStep * a_speed), 2);
+		if (player.GetX() < (leftMoveExtreeme + player.GetWidth()*.1f))
 		{
-			x = (leftMoveExtreeme + width*.1f);
+			player.ChangeX((leftMoveExtreeme + player.GetWidth()*.1f), 3);
 		}
 	}
 
 	//Moving Right
 	if (IsKeyDown(moveRight) && hasJumped == false)
 	{
-		x += a_timeStep * a_speed;
-		if (x >(rightMoveExtreeme - width) && velocity > 0)
+		player.ChangeX((a_timeStep * a_speed), 1);
+		if (player.GetX() >(rightMoveExtreeme - player.GetWidth()) && velocity > 0)
 		{
-			x = (rightMoveExtreeme - width);
+			player.ChangeX((rightMoveExtreeme - player.GetWidth()), 3);
 		}
 	}
 
 	//Moving Up
 	if (IsKeyDown(jump) && hasJumped == false && velocity >= 0.10f)
 	{
-				y += velocity;
+				player.ChangeY(velocity, 1);
 	}
 
 	if (!IsKeyDown(jump))
 	{
 			
-			if (collision == true)
+			/*if (collision == true)
 			{
-				y = (blocks[1].upperRightCornerY + (heigth));
+				y = (blocks[0].blockHeigth + (width * 0.5f));
 				hasJumped = false;
 				velocity = 10.f;
 				collision = false;
 			}
 
-			else if (hasJumped == false)
+			if (hasJumped == false && collision == false)
 			{
 				y -= 0.1f;
-			}
+			}*/
 	}
 
 	if (velocity >= 0)
@@ -239,7 +209,7 @@ void Player::Move(float a_speed, float a_timeStep)
 	}
 
 	//Move the player sprite
-	MoveSprite(spriteID, x, y);
+	MoveSprite(this->GetSpriteID(), this->GetX(), this->GetY());
 }
 
 Player::~Player()

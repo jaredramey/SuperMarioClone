@@ -7,11 +7,9 @@
 const int screenWidth = 1300;
 const int screenHeigth = 600;
 
-Player player = Player();
-GroundBlock ground = GroundBlock();
 
-Block * gBlock = &ground;
-Block * bBlock = &ground;
+//Block * gBlock = &ground;
+//Block * bBlock = &ground;
 
 
 int main( int argc, char* argv[] )
@@ -21,27 +19,30 @@ int main( int argc, char* argv[] )
     Initialise(screenWidth, screenHeigth, false, "Super Mario Clone");
     SetBackgroundColour(SColour(197, 255, 255, 255));
 
+	Player player = Player();
+	//ground = GroundBlock();
+
 	//Set everything needed for player
 	//unsigned int myTextureHandle = CreateSprite("./images/platformerArt_v4/png/character/front.png", 66, 92, true);
-	player.SetSpriteID(CreateSprite("./images/platformerArt_v4/png/character/front.png", 66, 92, true));
+	/*player.SetSpriteID(CreateSprite("./images/platformerArt_v4/png/character/front.png", 66, 92, true));
 	player.SetPosition(100.f, 300.f);
-	player.SetSize(66.f, 92.f);
+	player.SetSize(66.f, 92.f);*/
 	player.SetMovementKeys(65, 68, 87);
 	player.SetMoveExtreeme(50, 1500, 100);
 	player.SetVelocity(1.f);
 	
 
 	//set everything for the ground block
-	gBlock->SetBlockTextureID(CreateSprite("./images/platformerArt_v4/png/ground.png", 100, 100, true), 1);
+	/*gBlock->SetBlockTextureID(CreateSprite("./images/platformerArt_v4/png/ground.png", 100, 100, true), 1);
 	gBlock->SetBlockPosition(50, 50, 1, 4);
 	gBlock->SetBlockWidthHeigth(100, 100, 4);
-	gBlock->SetBlockCorners(1, 4);
+	gBlock->SetBlockCorners(1, 4);*/
 	
 
 	//set everything for the "brick" block
-	bBlock->SetBlockTextureID(CreateSprite("./images/platformerArt_v4/png/block.png", 70, 70, true), 2);
+	/*bBlock->SetBlockTextureID(CreateSprite("./images/platformerArt_v4/png/block.png", 70, 70, true), 2);
 	bBlock->SetBlockPosition(350, 275, 2, 4);
-	bBlock->SetBlockCorners(2, 4);
+	bBlock->SetBlockCorners(2, 4);*/
 
 	//for debugging where corners are
 	unsigned int Debug = CreateSprite("./images/platformerArt_v4/png/alien_plant.png", 10, 10, true);
@@ -57,32 +58,17 @@ int main( int argc, char* argv[] )
     do
     {
 		ClearScreen();		
-		player.SetPlayerCorners();
+		//player.SetPlayerCorners();
 		
-
+		
 		//debugging corners
 		//Block
-		MoveSprite(Debug, gBlock->GetCorner1(), gBlock->GetCorner2());
-		DrawSprite(Debug);
-		MoveSprite(Debug2, gBlock->GetCorner1_2(), gBlock->GetCorner2_2());
-		DrawSprite(Debug2);
-		MoveSprite(Debug3, gBlock->GetCorner1_3(), gBlock->GetCorner2_3());
-		DrawSprite(Debug3);
-		MoveSprite(Debug4, gBlock->GetCorner1_4(), gBlock->GetCorner2_4());
-		DrawSprite(Debug4);
+
 
 		//Player
-		MoveSprite(Debug5, player.GetPlayerCorner1(), player.GetPlayerCorner2());
-		DrawSprite(Debug5);
-		MoveSprite(Debug6, player.GetPlayerCorner1_2(), player.GetPlayerCorner2_2());
-		DrawSprite(Debug6);
-		MoveSprite(Debug7, player.GetPlayerCorner1_3(), player.GetPlayerCorner2_3());
-		DrawSprite(Debug7);
-		MoveSprite(Debug8, player.GetPlayerCorner1_4(), player.GetPlayerCorner2_4());
-		DrawSprite(Debug8);
 
-		gBlock->DrawBlock(1, 4);
-		bBlock->DrawBlock(2, 4);
+		//gBlock->DrawBlock(1, 4);
+		//bBlock->DrawBlock(2, 4);
 
 		player.Move(300.0f, GetDeltaTime());
         DrawSprite(player.GetSpriteID());
