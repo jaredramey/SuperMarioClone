@@ -159,6 +159,11 @@ void Player::CheckCollision(float a_upLeftX, float a_upLeftY, float a_upRightX, 
 		{
 			collision = false;
 		}*/
+	for (int i = 0; i < myVect.size(); i++)
+	{
+	
+	}
+
 	for (int i = 0; i < 50; i++)
 	{
 		//(a_lowLeftY >= (blocks[i].upperLeftCornerY)) && (a_lowLeftX >= blocks[i].upperLeftCornerX) && (a_lowLeftX >= blocks[i].upperRightCornerX)

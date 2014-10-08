@@ -1,7 +1,8 @@
-#pragma once
 #include "AIE.h"
 #include "Block.h"
 #include "Window.h"
+#pragma once
+
 
 class Player : public Block, public Window
 {

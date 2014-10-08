@@ -29,11 +29,11 @@ public:
 	};
 
 	Object blocks[50];
+	std::vector<Object> myVect;
 	Object floatingBlocks[50];
 
 	Block();
 	~Block();
-
 	
 	virtual void SetBlockPosition(float a_blockX, float a_blockY, int a_blockID, int a_itteration);
 	virtual void DrawBlock(int a_blockID , int a_itteration);
