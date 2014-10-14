@@ -19,6 +19,12 @@ private:
 	unsigned int spriteID;
 
 public:
+	void SetSpriteID(char* a_spriteID);
+	void SetX(float a_x);
+	void SetY(float a_y);
+	void SetWidth(float a_width);
+	void SetHeigth(float a_heigth);
+
 	void ChangeX(float xChange, int changeType);
 	void ChangeY(float yChange, int changeType);
 	void SetCorners();
@@ -38,7 +44,6 @@ public:
 
 	unsigned int GetSpriteID();
 
-	Entity(float a_x, float a_y, float a_width, float a_heigth, const char* a_spriteID);
 	Entity();
 	virtual ~Entity();
 };

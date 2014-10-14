@@ -1,40 +1,53 @@
 #include "Entity.h"
 #include "AIE.h"
 
-
 Entity::Entity()
 {
-	
+
 }
 
-Entity::Entity(float a_x, float a_y, float a_width, float a_heigth, const char* a_spriteID)
+void Entity::SetX(float a_x)
 {
 	x = a_x;
-	y = a_y;
-	width = a_width;
-	heigth = a_heigth;
-	//unsigned int temp = CreateSprite("./images/platformerArt_v4/png/alien_plant.png", a_width, a_heigth, true);
-	spriteID = CreateSprite(a_spriteID, a_width, a_heigth, true);
-
-	SetCorners();
 }
+
+void Entity::SetY(float a_y)
+{
+	y = a_y;
+}
+
+void Entity::SetWidth(float a_width)
+{
+	width = a_width;
+}
+
+void Entity::SetHeigth(float a_heigth)
+{
+	heigth = a_heigth;
+}
+
+void Entity::SetSpriteID(char* a_spriteID)
+{
+	spriteID = CreateSprite(a_spriteID, width, heigth, true);
+}
+
 
 //1 = add, 2 = subtract, 3 = stay in place
 void Entity::ChangeX(float xChange, int changeType)
 {
 	if (changeType == 1)
 	{
-		x += xChange;
+		this->x += xChange;
 	}
 
 	else if (changeType == 2)
 	{
-		x -= xChange;
+		this->x -= xChange;
 	}
 
 	else
 	{
-		x = xChange;
+		this->x = xChange;
 	}
 }
 
@@ -43,17 +56,17 @@ void Entity::ChangeY(float yChange, int changeType)
 {
 	if (changeType == 1)
 	{
-		y += yChange;
+		this->y += yChange;
 	}
 
 	else if (changeType == 2)
 	{
-		y -= yChange;
+		this->y -= yChange;
 	}
 
 	else
 	{
-		y = yChange;
+		this->y = yChange;
 	}
 }
 
@@ -71,67 +84,67 @@ void Entity::SetCorners()
 
 float Entity::GetX()
 {
-	return x;
+	return this->x;
 }
 
 float Entity::GetY()
 {
-	return y;
+	return this->y;
 }
 
 float Entity::GetWidth()
 {
-	return width;
+	return this->width;
 }
 
 float Entity::GetHeigth()
 {
-	return heigth;
+	return this->heigth;
 }
 
 float Entity::GetUpLeftCornerX()
 {
-	return upLeftCornerX;
+	return this->upLeftCornerX;
 }
 
 float Entity::GetUpLeftCornerY()
 {
-	return upLeftCornerY;
+	return this->upLeftCornerY;
 }
 
 float Entity::GetUpRightCornerX()
 {
-	return upRightCornerX;
+	return this->upRightCornerX;
 }
 
 float Entity::GetUpRightCornerY()
 {
-	return upRightCornerY;
+	return this->upRightCornerY;
 }
 
 float Entity::GetLowLeftCornerX()
 {
-	return lowLeftCornerX;
+	return this->lowLeftCornerX;
 }
 
 float Entity::GetLowLeftCornerY()
 {
-	return lowLeftCornerY;
+	return this->lowLeftCornerY;
 }
 
 float Entity::GetLowRightCornerX()
 {
-	return lowRightCornerX;
+	return this->lowRightCornerX;
 }
 
 float Entity::GetLowRightCornerY()
 {
-	return lowRightCornerY;
+	return this->lowRightCornerY;
 }
 
 unsigned int Entity::GetSpriteID()
 {
-	return spriteID;
+	return this->spriteID;
 }
 
 Entity::~Entity()

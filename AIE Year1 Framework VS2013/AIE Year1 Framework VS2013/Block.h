@@ -9,21 +9,23 @@ class Block : public Entity
 {
 public:
 
-
 	Block();
 	~Block();
+
+	void SetPos(float a_x, float a_y);
+	void SetSize(float a_width, float a_heigth);
+	void SetBlockID(char* a_spriteID);
 	
 	/*virtual void SetBlockPosition(float a_blockX, float a_blockY, int a_blockID, int a_itteration);
 	virtual void DrawBlock(int a_blockID , int a_itteration);
 	virtual void SetBlockTextureID(int a_blockID, unsigned int a_textureID);
 	virtual void SetBlockCorners(int a_blockID, int a_itteration);
 	virtual void SetBlockWidthHeigth(float a_width, float a_heigth, int a_itteration);*/
-	
 
-	static const char* BLOCK_SPRITEID;
-	static const float BLOCK_X;
-	static const float BLOCK_Y;
-	static const float BLOCK_WIDTH;
-	static const float BLOCK_HEIGTH;
+	static char* GROUND_BLOCK_SPRITEID;
+	static const float GROUND_BLOCK_X;
+	static const float GROUND_BLOCK_Y;
+	static const float GROUND_BLOCK_WIDTH;
+	static const float GROUND_BLOCK_HEIGTH;
 };
 

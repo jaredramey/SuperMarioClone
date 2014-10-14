@@ -2,10 +2,9 @@
 #include "Player.h"
 #include "Block.h"
 #include "GroundBlock.h"
+#include "Collision.h"
+#include "GlobalInfo.h"
 #include <iostream>
-
-const int screenWidth = 1300;
-const int screenHeigth = 600;
 
 
 //Block * gBlock = &ground;
@@ -15,34 +14,48 @@ const int screenHeigth = 600;
 int main( int argc, char* argv[] )
 {	
 
-
-    Initialise(screenWidth, screenHeigth, false, "Super Mario Clone");
+	Initialise(GlobalInfo::screenWidth, GlobalInfo::screenHeigth, false, "Super Mario Clone");
     SetBackgroundColour(SColour(197, 255, 255, 255));
 
+	bool collisionDetection;
+
 	Player player = Player();
+	Block testBlock = Block();
+	Collision collision = Collision();
+	std::vector<Block*> groundBlock;
+	for (int i = 0; i < 4; i++)
+	{
+		groundBlock.push_back(new Block());
+	}
+	std::vector<Block*> WoodPlanks;
 	//ground = GroundBlock();
 
-	//Set everything needed for player
-	//unsigned int myTextureHandle = CreateSprite("./images/platformerArt_v4/png/character/front.png", 66, 92, true);
-	/*player.SetSpriteID(CreateSprite("./images/platformerArt_v4/png/character/front.png", 66, 92, true));
-	player.SetPosition(100.f, 300.f);
-	player.SetSize(66.f, 92.f);*/
 	player.SetMovementKeys(65, 68, 87);
 	player.SetMoveExtreeme(50, 1500, 100);
 	player.SetVelocity(1.f);
 	
-
 	//set everything for the ground block
-	/*gBlock->SetBlockTextureID(CreateSprite("./images/platformerArt_v4/png/ground.png", 100, 100, true), 1);
-	gBlock->SetBlockPosition(50, 50, 1, 4);
-	gBlock->SetBlockWidthHeigth(100, 100, 4);
-	gBlock->SetBlockCorners(1, 4);*/
-	
+	//groundBlock = std::vector<Block*>();
+	int tempX = testBlock.GetX();
+	int tempY = testBlock.GetY();
+	int tempWidth = testBlock.GetWidth();
+	int tempHeigth = testBlock.GetHeigth();
+	for (int i = 0; i < 4; i++)
+	{
+		if (i == 0)
+		{
+			(*groundBlock[i]).SetPos(tempX, tempY);
+			(*groundBlock[i]).SetSize(tempWidth, tempHeigth);
+		}
+		else if (i > 0)
+		{
+			(*groundBlock[i]).SetPos(tempX, tempY);
+			(*groundBlock[i]).SetSize(tempWidth, tempHeigth);
+		}
 
+		tempX += 98;
+	}
 	//set everything for the "brick" block
-	/*bBlock->SetBlockTextureID(CreateSprite("./images/platformerArt_v4/png/block.png", 70, 70, true), 2);
-	bBlock->SetBlockPosition(350, 275, 2, 4);
-	bBlock->SetBlockCorners(2, 4);*/
 
 	//for debugging where corners are
 	unsigned int Debug = CreateSprite("./images/platformerArt_v4/png/alien_plant.png", 10, 10, true);
@@ -57,20 +70,28 @@ int main( int argc, char* argv[] )
     //Game Loop
     do
     {
-		ClearScreen();		
-		//player.SetPlayerCorners();
-		
-		
-		//debugging corners
-		//Block
+		ClearScreen();
+		for (int i = 0; i < 4; i++)
+		{
+			MoveSprite((*groundBlock[i]).GetSpriteID(), (*groundBlock[i]).GetX(), (*groundBlock[i]).GetY());
+			DrawSprite((*groundBlock[i]).GetSpriteID());
+		}
 
-
-		//Player
-
-		//gBlock->DrawBlock(1, 4);
-		//bBlock->DrawBlock(2, 4);
-
-		player.Move(300.0f, GetDeltaTime());
+		for (int i = 0; i < 4; i++)
+		{
+			if (collision.CheckCollision(player.GetX(), (*groundBlock[i]).GetX(), player.GetY(), (*groundBlock[i]).GetY(), player.GetWidth(), player.GetHeigth(), (*groundBlock[i]).GetWidth(), (*groundBlock[i]).GetHeigth()) == true)
+			{
+				collisionDetection = true;
+				break;
+			}
+			else
+			{
+				collisionDetection = false;
+			}
+		}
+		//DrawSprite(testBlock.GetSpriteID());
+		//Check Collision, move player
+		player.Move(300.0f, GetDeltaTime(), collisionDetection);
         DrawSprite(player.GetSpriteID());
 
 		
