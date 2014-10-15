@@ -3,7 +3,7 @@
 
 char* PLAYER_SPRITEID = "./images/platformerArt_v4/png/character/front.png";
 float PLAYER_X = 100.f;
-float PLAYER_Y = 300.f;
+float PLAYER_Y = 200.f;
 float PLAYER_WIDTH = 66.f;
 float PLAYER_HEIGTH = 92.f;
 
@@ -14,6 +14,8 @@ Player::Player()
 	SetWidth(PLAYER_WIDTH);
 	SetHeigth(PLAYER_HEIGTH);
 	SetSpriteID(PLAYER_SPRITEID);
+	SetPosition(PLAYER_X, PLAYER_Y);
+	SetCollisionDx((GetHeigth()*0.5f));
 }
 
 
@@ -34,6 +36,16 @@ void Player::SetMoveExtreeme(float a_leftExtreeme, float a_rightExtreeme, float 
 	leftMoveExtreeme = a_leftExtreeme;
 	rightMoveExtreeme = a_rightExtreeme;
 	bottomExtreeme = a_bottomeExtreeme;
+}
+
+float Player::GetMovementKeyRight()
+{
+	return moveRight;
+}
+
+float Player::GetMovementKeyLeft()
+{
+	return moveLeft;
 }
 
 void Player::Move(float a_speed, float a_timeStep, bool collision)
@@ -75,7 +87,7 @@ void Player::Move(float a_speed, float a_timeStep, bool collision)
 			//change gravity to a constant and move out of box when colliding
 			if (hasJumped == false && collision == false)
 			{
-				ChangeY(0.1f, 2);
+				ChangeY(0.3f, 2);
 			}
 	}
 
@@ -84,7 +96,7 @@ void Player::Move(float a_speed, float a_timeStep, bool collision)
 		velocity -= 0.15f;
 	}
 
-	//Move the player sprite
+	//Move the player sprite and it's corners
 	SetCorners();
 	MoveSprite(GetSpriteID(), GetX(), GetY());
 }

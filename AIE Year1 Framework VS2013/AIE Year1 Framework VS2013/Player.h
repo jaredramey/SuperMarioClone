@@ -33,6 +33,9 @@ public:
 	void SetMovementKeys(unsigned int a_moveLeft, unsigned int a_moveRight, unsigned int a_jump);
 	void SetMoveExtreeme(float a_leftExtreeme, float a_rightExtreeme, float a_bottomeExtreeme);
 	void SetVelocity(float a_velocity);
+	float GetMovementKeyRight();
+	float GetMovementKeyLeft();
+	float GetMovementKeyJump();
 
 	void Move(float a_speed, float a_timeStep, bool collision);
 

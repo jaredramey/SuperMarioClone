@@ -17,13 +17,14 @@ int main( int argc, char* argv[] )
 	Initialise(GlobalInfo::screenWidth, GlobalInfo::screenHeigth, false, "Super Mario Clone");
     SetBackgroundColour(SColour(197, 255, 255, 255));
 
-	bool collisionDetection;
+	bool collisionDetection = false;
+	int tempNum;
 
 	Player player = Player();
 	Block testBlock = Block();
 	Collision collision = Collision();
 	std::vector<Block*> groundBlock;
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 20; i++)
 	{
 		groundBlock.push_back(new Block());
 	}
@@ -31,7 +32,7 @@ int main( int argc, char* argv[] )
 	//ground = GroundBlock();
 
 	player.SetMovementKeys(65, 68, 87);
-	player.SetMoveExtreeme(50, 1500, 100);
+	player.SetMoveExtreeme((0+(player.GetWidth()*.5f)), 1500, 100);
 	player.SetVelocity(1.f);
 	
 	//set everything for the ground block
@@ -40,62 +41,105 @@ int main( int argc, char* argv[] )
 	int tempY = testBlock.GetY();
 	int tempWidth = testBlock.GetWidth();
 	int tempHeigth = testBlock.GetHeigth();
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 20; i++)
 	{
 		if (i == 0)
 		{
 			(*groundBlock[i]).SetPos(tempX, tempY);
+			(*groundBlock[i]).SetPosition(tempX, tempY);
 			(*groundBlock[i]).SetSize(tempWidth, tempHeigth);
+			MoveSprite((*groundBlock[i]).GetSpriteID(), (*groundBlock[i]).GetX(), (*groundBlock[i]).GetY());
 		}
 		else if (i > 0)
 		{
 			(*groundBlock[i]).SetPos(tempX, tempY);
 			(*groundBlock[i]).SetSize(tempWidth, tempHeigth);
+			MoveSprite((*groundBlock[i]).GetSpriteID(), (*groundBlock[i]).GetX(), (*groundBlock[i]).GetY());
 		}
 
 		tempX += 98;
 	}
+
+	tempX = testBlock.GetX();
 	//set everything for the "brick" block
 
 	//for debugging where corners are
 	unsigned int Debug = CreateSprite("./images/platformerArt_v4/png/alien_plant.png", 10, 10, true);
 	unsigned int Debug2 = CreateSprite("./images/platformerArt_v4/png/coin_bronze.png", 10, 10, true);
-	unsigned int Debug3 = CreateSprite("./images/platformerArt_v4/png/alien_plant.png", 10, 10, true);
-	unsigned int Debug4 = CreateSprite("./images/platformerArt_v4/png/alien_plant.png", 10, 10, true);
+	unsigned int Debug3 = CreateSprite("./images/platformerArt_v4/png/coin_gold.png", 10, 10, true);
+	unsigned int Debug4 = CreateSprite("./images/platformerArt_v4/png/coin_silver.png", 10, 10, true);
 	unsigned int Debug5 = CreateSprite("./images/platformerArt_v4/png/alien_plant.png", 10, 10, true);
-	unsigned int Debug6 = CreateSprite("./images/platformerArt_v4/png/alien_plant.png", 10, 10, true);
-	unsigned int Debug7 = CreateSprite("./images/platformerArt_v4/png/alien_plant.png", 10, 10, true);
-	unsigned int Debug8 = CreateSprite("./images/platformerArt_v4/png/alien_plant.png", 10, 10, true);
+	unsigned int Debug6 = CreateSprite("./images/platformerArt_v4/png/coin_bronze.png", 10, 10, true);
+	unsigned int Debug7 = CreateSprite("./images/platformerArt_v4/png/coin_gold.png", 10, 10, true);
+	unsigned int Debug8 = CreateSprite("./images/platformerArt_v4/png/coin_silver.png", 10, 10, true);
 
     //Game Loop
     do
     {
-		ClearScreen();
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 20; i++)
 		{
-			MoveSprite((*groundBlock[i]).GetSpriteID(), (*groundBlock[i]).GetX(), (*groundBlock[i]).GetY());
+			
 			DrawSprite((*groundBlock[i]).GetSpriteID());
 		}
 
-		for (int i = 0; i < 4; i++)
+		ClearScreen();
+		MoveSprite(Debug, player.GetLowLeftCornerX(), player.GetLowLeftCornerY());
+		DrawSprite(Debug);
+		MoveSprite(Debug2, player.GetLowRightCornerX(), player.GetLowRightCornerY());
+		DrawSprite(Debug2);
+		MoveSprite(Debug3, player.GetUpLeftCornerX(), player.GetUpLeftCornerY());
+		DrawSprite(Debug3);
+		MoveSprite(Debug4, player.GetUpRightCornerX(), player.GetUpRightCornerY());
+		DrawSprite(Debug4);
+
+		MoveSprite(Debug5, (*groundBlock[0]).GetLowLeftCornerX(), (*groundBlock[0]).GetLowLeftCornerY());
+		DrawSprite(Debug5);
+		MoveSprite(Debug6, (*groundBlock[0]).GetLowRightCornerX(), (*groundBlock[0]).GetLowRightCornerY());
+		DrawSprite(Debug6);
+		MoveSprite(Debug7, (*groundBlock[0]).GetUpLeftCornerX(), (*groundBlock[0]).GetUpLeftCornerY());
+		DrawSprite(Debug7);
+		MoveSprite(Debug8, (*groundBlock[0]).GetUpRightCornerX(), (*groundBlock[0]).GetUpRightCornerY());
+		DrawSprite(Debug8);
+
+		for (int i = 0; i < 20; i++)
 		{
-			if (collision.CheckCollision(player.GetX(), (*groundBlock[i]).GetX(), player.GetY(), (*groundBlock[i]).GetY(), player.GetWidth(), player.GetHeigth(), (*groundBlock[i]).GetWidth(), (*groundBlock[i]).GetHeigth()) == true)
+			if (collision.CheckCollision(player.GetLowLeftCornerX(), (*groundBlock[i]).GetUpLeftCornerX(), player.GetLowLeftCornerY(), (*groundBlock[i]).GetUpLeftCornerY(), player.GetLowRightCornerX(), (*groundBlock[i]).GetUpRightCornerX(), player.GetLowRightCornerY(), (*groundBlock[i]).GetUpRightCornerY()) == true)
 			{
 				collisionDetection = true;
 				break;
-			}
-			else
-			{
-				collisionDetection = false;
 			}
 		}
 		//DrawSprite(testBlock.GetSpriteID());
 		//Check Collision, move player
 		player.Move(300.0f, GetDeltaTime(), collisionDetection);
         DrawSprite(player.GetSpriteID());
+		if (collisionDetection == true)
+		{
+			collisionDetection = false;
+		}
 
-		
-       
+		if (player.GetX() > 100 && IsKeyDown(player.GetMovementKeyRight()))
+		{
+			for (int i = 0; i < 20; i++)
+			{
+				tempNum = ((*groundBlock[i]).GetX() - player.GetX());
+				(*groundBlock[i]).ChangeX(.75f, 2);
+				(*groundBlock[i]).SetCorners();
+				MoveSprite((*groundBlock[i]).GetSpriteID(), ((*groundBlock[i]).GetX() /*- player.GetX()*/), ((*groundBlock[i]).GetY()));
+			}
+		 }
+
+			if (IsKeyDown(player.GetMovementKeyLeft()) && (player.GetX() > (*groundBlock[1]).GetX()))
+			{
+				for (int i = 0; i < 20; i++)
+				{
+					tempNum = ((*groundBlock[i]).GetX() - player.GetX());
+					(*groundBlock[i]).ChangeX((.75f), 1);
+					(*groundBlock[i]).SetCorners();
+					MoveSprite((*groundBlock[i]).GetSpriteID(), ((*groundBlock[i]).GetX() /*- player.GetX()*/), ((*groundBlock[i]).GetY()));
+				}
+			}
+
 
     } while(!FrameworkUpdate());
 

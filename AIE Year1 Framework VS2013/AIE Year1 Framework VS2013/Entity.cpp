@@ -3,8 +3,38 @@
 
 Entity::Entity()
 {
-
+	//Jeff's collision method
+	collisionDx = 0.0f;
 }
+
+bool Entity::isCollided(Entity* other)
+{
+	using namespace std;
+	return pow(other->position.x - position.x, 2) + pow(other->position.y - position.y, 2) <= pow(collisionDx + other->collisionDx,2);
+}
+
+void Entity::SetCollisionDx(float dx)
+{
+	collisionDx = dx;
+}
+
+float Entity::GetCollisionDx()
+{
+	return collisionDx;
+}
+
+Point2D Entity::GetPosition()
+{
+	return position;
+}
+
+void Entity::SetPosition(float a_x, float a_y)
+{
+	position.x = a_x;
+	position.y = a_y;
+}
+
+
 
 void Entity::SetX(float a_x)
 {
@@ -30,7 +60,6 @@ void Entity::SetSpriteID(char* a_spriteID)
 {
 	spriteID = CreateSprite(a_spriteID, width, heigth, true);
 }
-
 
 //1 = add, 2 = subtract, 3 = stay in place
 void Entity::ChangeX(float xChange, int changeType)
@@ -72,14 +101,17 @@ void Entity::ChangeY(float yChange, int changeType)
 
 void Entity::SetCorners()
 {
-	upLeftCornerX = (x + (heigth*.5f));
-	upLeftCornerY = (y - (width*.5f));
-	upRightCornerX = (x + (heigth*.5f));
-	upRightCornerY = (y + (width*.5f));
-	lowLeftCornerX = (x - (heigth*.5f));
-	lowLeftCornerY = (y - (width*.5f));
-	lowRightCornerX = (x - (heigth*.5f));
-	lowRightCornerY = (y + (width*.5f));
+	upLeftCornerX = (x - (width*.5f));
+	upLeftCornerY = (y + (heigth*.5f));
+
+	upRightCornerX = (x + (width*.5f));
+	upRightCornerY = (y + (heigth*.5f));
+
+	lowLeftCornerX = (x - (width*.5f));
+	lowLeftCornerY = (y - (heigth*.5f));
+
+	lowRightCornerX = (x + (width*.5f));
+	lowRightCornerY = (y - (heigth*.5f));
 }
 
 float Entity::GetX()
