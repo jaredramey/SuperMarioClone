@@ -9,6 +9,6 @@ public:
 	Enemy();
 	~Enemy();
 
-	void Move(float a_timeStep, float a_speed);
+	void Move(float a_timeStep, float a_speed, bool direction);
 };
 

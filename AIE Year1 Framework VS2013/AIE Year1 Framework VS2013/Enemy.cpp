@@ -5,17 +5,17 @@ Enemy::Enemy()
 {
 }
 
-void Enemy::Move(float a_timeStep, float a_speed)
+void Enemy::Move(float a_timeStep, float a_speed, bool direction)
 {
 	bool left;
 	bool right;
 
-	if (left == true)
+	if (direction == true)
 	{
-		ChangeX(.75f, 2);
+		left = true;
 	}
 
-	if (right == true)
+	if (left == true)
 	{
 		ChangeX(.75f, 2);
 	}

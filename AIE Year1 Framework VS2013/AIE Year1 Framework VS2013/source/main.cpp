@@ -4,6 +4,7 @@
 #include "GroundBlock.h"
 #include "Collision.h"
 #include "GlobalInfo.h"
+#include "Slime.h"
 #include <iostream>
 
 
@@ -22,6 +23,8 @@ int main( int argc, char* argv[] )
 
 	Player player = Player();
 	Block testBlock = Block();
+	Enemy enemy = Enemy();
+	Slime slime = Slime();
 	Collision collision = Collision();
 	std::vector<Block*> groundBlock;
 	for (int i = 0; i < 20; i++)
@@ -29,11 +32,19 @@ int main( int argc, char* argv[] )
 		groundBlock.push_back(new Block());
 	}
 	std::vector<Block*> WoodPlanks;
+	
+	std::vector<Slime*> slimes;
+	for (int i = 0; i < 2; i++)
+	{
+		slimes.push_back(new Slime());
+	}
+
+
 	//ground = GroundBlock();
 
 	player.SetMovementKeys(65, 68, 87);
 	player.SetMoveExtreeme((0+(player.GetWidth()*.5f)), 1500, 100);
-	player.SetVelocity(1.f);
+	player.SetVelocity(.5f);
 	
 	//set everything for the ground block
 	//groundBlock = std::vector<Block*>();
@@ -60,7 +71,25 @@ int main( int argc, char* argv[] )
 		tempX += 98;
 	}
 
+	int tempSlimeX = slime.GetX();
+	for (int i = 0; i < 2; i++)
+	{
+		if (i == 0)
+		{
+			(*slimes[i]).SetPosition(tempSlimeX, slime.GetY());
+			MoveSprite((*slimes[i]).GetSpriteID(), (*slimes[i]).GetX(), (*slimes[i]).GetY());
+		}
+		else if (i > 0)
+		{
+			(*slimes[i]).SetPosition(tempSlimeX, slime.GetY());
+			MoveSprite((*slimes[i]).GetSpriteID(), (*slimes[i]).GetX(), (*slimes[i]).GetY());
+		}
+
+		tempSlimeX += 98;
+	}
+
 	tempX = testBlock.GetX();
+	tempSlimeX = slime.GetX();
 	//set everything for the "brick" block
 
 	//for debugging where corners are
@@ -82,6 +111,11 @@ int main( int argc, char* argv[] )
 			DrawSprite((*groundBlock[i]).GetSpriteID());
 		}
 
+		for (int i = 0; i < 2; i++)
+		{
+			DrawSprite((*slimes[i]).GetSpriteID());
+			(*slimes[i]).Move(250.f, GetDeltaTime(), true);
+		}
 		ClearScreen();
 		MoveSprite(Debug, player.GetLowLeftCornerX(), player.GetLowLeftCornerY());
 		DrawSprite(Debug);
@@ -123,7 +157,7 @@ int main( int argc, char* argv[] )
 			for (int i = 0; i < 20; i++)
 			{
 				tempNum = ((*groundBlock[i]).GetX() - player.GetX());
-				(*groundBlock[i]).ChangeX(.75f, 2);
+				(*groundBlock[i]).ChangeX(1.f, 2);
 				(*groundBlock[i]).SetCorners();
 				MoveSprite((*groundBlock[i]).GetSpriteID(), ((*groundBlock[i]).GetX() /*- player.GetX()*/), ((*groundBlock[i]).GetY()));
 			}
@@ -134,7 +168,7 @@ int main( int argc, char* argv[] )
 				for (int i = 0; i < 20; i++)
 				{
 					tempNum = ((*groundBlock[i]).GetX() - player.GetX());
-					(*groundBlock[i]).ChangeX((.75f), 1);
+					(*groundBlock[i]).ChangeX((1.f), 1);
 					(*groundBlock[i]).SetCorners();
 					MoveSprite((*groundBlock[i]).GetSpriteID(), ((*groundBlock[i]).GetX() /*- player.GetX()*/), ((*groundBlock[i]).GetY()));
 				}
