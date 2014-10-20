@@ -19,6 +19,9 @@ int main( int argc, char* argv[] )
     SetBackgroundColour(SColour(197, 255, 255, 255));
 
 	bool collisionDetection = false;
+	bool enemyCollisionDetection = false;
+	bool enemyDead = false;
+	bool playerDead = false;
 	int tempNum;
 
 	Player player = Player();
@@ -76,7 +79,7 @@ int main( int argc, char* argv[] )
 	{
 		if (i == 0)
 		{
-			(*slimes[i]).SetPosition(tempSlimeX, slime.GetY());
+			(*slimes[i]).SetPosition((*slimes[i]).GetX(), slime.GetY());
 			MoveSprite((*slimes[i]).GetSpriteID(), (*slimes[i]).GetX(), (*slimes[i]).GetY());
 		}
 		else if (i > 0)
@@ -85,7 +88,7 @@ int main( int argc, char* argv[] )
 			MoveSprite((*slimes[i]).GetSpriteID(), (*slimes[i]).GetX(), (*slimes[i]).GetY());
 		}
 
-		tempSlimeX += 98;
+		tempSlimeX += 21;
 	}
 
 	tempX = testBlock.GetX();
@@ -113,8 +116,19 @@ int main( int argc, char* argv[] )
 
 		for (int i = 0; i < 2; i++)
 		{
+			(*slimes[i]).SetCorners();
+
+			if (collision.CheckCollision((*slimes[i]).GetLowLeftCornerX(), (*groundBlock[i]).GetUpLeftCornerX(), (*slimes[i]).GetLowLeftCornerY(), (*groundBlock[i]).GetUpLeftCornerY(), (*slimes[i]).GetLowRightCornerX(), (*groundBlock[i]).GetUpRightCornerX(), (*slimes[i]).GetLowRightCornerY(), (*groundBlock[i]).GetUpRightCornerY()) == true)
+			{
+				enemyCollisionDetection = true;
+			}
+			else
+			{
+				enemyCollisionDetection = false;
+			}
+			(*slimes[i]).Move(player.GetX(), enemyCollisionDetection, true);
+			MoveSprite((*slimes[i]).GetSpriteID(), (*slimes[i]).GetX(), (*slimes[i]).GetY());
 			DrawSprite((*slimes[i]).GetSpriteID());
-			(*slimes[i]).Move(250.f, GetDeltaTime(), true);
 		}
 		ClearScreen();
 		MoveSprite(Debug, player.GetLowLeftCornerX(), player.GetLowLeftCornerY());

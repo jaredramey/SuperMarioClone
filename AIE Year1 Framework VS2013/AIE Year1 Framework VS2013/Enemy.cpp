@@ -1,11 +1,12 @@
 #include "Enemy.h"
+#include "AIE.h"
 
 
 Enemy::Enemy()
 {
 }
 
-void Enemy::Move(float a_timeStep, float a_speed, bool direction)
+void Enemy::Move(float a_timeStep, bool collision, bool direction)
 {
 	bool left;
 	bool right;
@@ -17,7 +18,12 @@ void Enemy::Move(float a_timeStep, float a_speed, bool direction)
 
 	if (left == true)
 	{
-		ChangeX(.75f, 2);
+		ChangeX(.1f, 2);
+	}
+
+	if (collision == false)
+	{
+		ChangeY(0.3f, 2);
 	}
 }
 
